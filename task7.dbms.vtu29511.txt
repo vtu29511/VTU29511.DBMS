@@ -1,0 +1,53 @@
+SQL> connect
+Enter user-name: vtu29404
+Enter password:
+Connected.
+SQL>CREATE OR REPLACE TRIGGER update_total_match
+  2  AFTER INSERT ON matchteam
+  3  FOR EACH ROW
+  4  DECLARE
+  5      v_playerid  NUMBER;
+  6  BEGIN
+  7      v_playerid := :NEW.player_id;
+  8      UPDATE player
+  9      SET totalmatchesplayed = NVL(totalmatchesplayed,0) + 1
+ 10      WHERE playerid = v_playerid;
+ 11  END;
+ 12  /
+SQL>Trigger created.
+SQL>INSERT INTO matchteam VALUES (501, 1001);
+1 row created.
+SQL> SELECT playerid, fname, totalmatchesplayed FROM player;
+PLAYERID   FNAME    TOTALMATCHESPLAYED
+---------  -------  ------------------
+1001       MS       6
+1002       RAJAT    3
+SQL> CREATE OR REPLACE VIEW playermatchdetails AS
+  2  SELECT 
+  3      playerid,
+  4      fname || ' ' || lname AS playername,
+  5      totalmatchesplayed
+  6  FROM player;
+  7  /
+View created.
+SQL> SELECT * FROM playermatchdetails;
+PLAYERID   PLAYERNAME       TOTALMATCHESPLAYED
+---------  ---------------- ------------------
+1001       MS DHONI         6
+1002       RAJAT PADITAR    3
+1003       HARDIK PANDYA    4
+SQL> CREATE OR REPLACE PROCEDURE get_even_players IS
+  2      CURSOR evenplayers IS
+  3          SELECT playerid FROM player
+  4          WHERE MOD(TO_NUMBER(SUBSTR(playerid, -1)), 2) = 0;
+  5  BEGIN
+  6      FOR rec IN evenplayers LOOP
+  7          DBMS_OUTPUT.PUT_LINE('PLAYER ID: ' || rec.playerid);
+  8      END LOOP;
+  9  END;
+ 10  /
+Procedure created.
+SQL> SET SERVEROUTPUT ON;
+SQL> EXEC get_even_players;
+PLAYER ID: 1002
+PLAYER ID: 1004
