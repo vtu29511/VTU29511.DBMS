@@ -1,0 +1,36 @@
+SQL> connect
+Enter user-name: vtu29404
+Enter password:
+Connected.
+SQL>SELECT  B.BOARDID,B.NAME AS "BOARD NAME",T.TEAMID,T.NAME AS "TEAM NAME",T.COACH,T.CAPTIAN FROM CRICKETBOARD BJOIN TEAM T ON B.BOARDID = T.TEAMID;
+SQL>SELECT * FROM TEAM; 
+ BOARDID  BOARD NAME  TEAMID  TEAM NAME  COACH             CAPTIAN
+ -------  ----------  ------- ---------- ----------------- ----------
+ 101      b1          01      CSK        Stephen Fleming   Dhoni
+ 102      b2          02      RCB        Andy Flower       Rajat Patdiar
+ 103      b3          03      Mumbai     Jayawarden        Hardik
+SQL>SELECT M.MATCHID,M.RESULT,T.NAME AS "TEAM NAME", T.CAPTIAN AS "CAPTAIN"FROM MATCH M JOIN TEAM T ON LOWER(M.RESULT) LIKE LOWER('%' || T.NAME || '%');
+SQL>SELECT * from Match;
+ MATCHID  RESULT      TEAM NAME  CAPTAIN
+ -------  ----------  ---------- -------------
+ 501      CSK won     CSK        Dhoni
+ 502      RCB won     RCB        Rajat Patdiar
+ 503      Mumbai won  Mumbai     Hardik
+ 505      CSK won     CSK        Dhoni 
+SQL>SELECT T.NAME AS "TEAM NAME",COUNT(M.MATCHID) AS "MATCHES PLAYED"FROM TEAM T LEFT JOIN MATCH M ON LOWER(M.RESULT) LIKE LOWER('%' || T.NAME || '%')GROUP BY T.NAME;
+  TEAM NAME  MATCHES PLAYED
+  ---------- ---------------
+  CSK        2
+  RCB        1
+  Mumbai     1
+SQL>SELECT P.PLAYERID,P.FNAME,P.LNAME,P.AGE, P.PLAYINGROLE FROM PLAYER P JOIN TEAM T ON T.TEAMID = '03'WHERE LOWER(T.NAME) = 'mumbai';
+ PLAYERID  FNAME   LNAME   AGE  PLAYINGROLE
+--------- ------- ------- ---- -------------
+1003      Hardik  Pandya   30  All-rounder
+
+SQL>SELECT M.MATCHID,M.RESUL,G.NAME AS "GROUND NAME",G.LOCATION FROM MATCH M JOIN GROUND G ON M.MATCHID = G.GROUNDID - 200;
+ MATCHID  RESULT      GROUND NAME  LOCATION
+-------  ----------  ------------ ----------
+501      CSK won     Wankhede     Mumbai
+502      RCB won     Lords        London
+503      Mumbai won  MCG          Melbourne
