@@ -1,0 +1,39 @@
+SQL> connect
+Enter user-name: vtu29404
+Enter password:
+Connected.
+SQL>SELECT * FROM TEAM WHERE TEAMID IN ( SELECT DISTINCT '01' FROM MATCH WHERE RESULT = 'csk won');
+SQL>SELECT * from cricketboard;
+    TEAM NAME       COACH            CAPTIAN        WINNING MATCHES
+--------------- ---------------- --------------- ----------------
+csk             stephen fleming  Dhoni                     0
+rcb             andy flower      rajat patdiar             0
+mumbai          jayawarden       hardik                    0
+SQL>SELECT  NAME AS "TEAM NAME",(SELECT COUNT(MATCHID)FROM MATCH WHERE RESULT = 'Tie') AS "TIE MATCHES"FROM TEAM;
+SQL>SELECT * FROM Team;
+ TEAM NAME       TIE MATCHES
+ --------------- ------------
+ rcb                        0
+ csk                        0
+ Mumbai                     0
+SQL>SELECT *FROM TEAMWHERE TEAMID IN (SELECT DISTINCT '01'FROM MATCHWHERE RESULT = 'csk won');
+SQL>SELECT * FROM player;
+    TEAMID  NAME   COACH            CAPTIAN
+    ------- ------ ---------------- ---------------
+    01      csk    stephen fleming  Dhoni
+SQL>SELECT PLAYERID, FNAME, LNAME, AGE, PLAYINGROLEFROM PLAYER WHERE AGE > 35;
+SQL>SELECT * FROM Match;
+    PLAYERID  FNAME  LNAME   AGE  PLAYINGROLE
+    --------- ------ ------- ---- ----------------
+    1001      MS     DHONI   49   BATSMAN
+SQL>SELECT *FROM TEAMWHERE TEAMID NOT IN (SELECT DISTINCT TEAMID FROM MATCH);
+    TEAMID  NAME     COACH            CAPTIAN
+    ------- -------- ---------------- ---------------
+    01      csk      stephen fleming  Dhoni
+    02      rcb      andy flower      rajat patdiar
+    03      mumbai   jayawarden       Hardik
+SQL>SELECT  T.TEAMID, C.BOARDID,P.FNAME || ' ' || P.LNAME AS "PLAYER NAME"FROM TEAM TJOIN PLAYER P ON P.PLAYERID = '1001'JOIN CRICKETBOARD C ON C.BOARDID = '101';
+    TEAMID  BOARDID  PLAYER NAME
+    ------- -------- -------------
+    01      101      MS DHONI
+                     
