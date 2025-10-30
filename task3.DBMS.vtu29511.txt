@@ -1,0 +1,131 @@
+SQL> connect
+Enter user-name: vtu29404
+Enter password:
+Connected.
+SQL> desc Cricketboard;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ BOARDID                                   NOT NULL VARCHAR2(25)
+ NAME                                               VARCHAR2(50)
+ ADDRESS                                            VARCHAR2(50)
+ CONTACT                                            NUMBER
+
+SQL> desc team;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ TEAMID                                    NOT NULL VARCHAR2(25)
+ NAME                                               VARCHAR2(25)
+ COACH                                              VARCHAR2(25)
+ CAPTIAN                                            VARCHAR2(50)
+
+SQL> desc player;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PLAYERID                                  NOT NULL VARCHAR2(25)
+ FNAME                                              VARCHAR2(25)
+ LNAME                                              VARCHAR2(25)
+ AGE                                                NUMBER(38)
+ DATEOFBARTH                                        DATE
+ PLAYINGROLE                                        VARCHAR2(50)
+
+SQL> desc umpire;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ UMPIREID                                  NOT NULL VARCHAR2(25)
+ FNAME                                              VARCHAR2(25)
+ LNAME                                              VARCHAR2(25)
+ AGE                                                NUMBER(38)
+ DATEOFBIRTH                                        DATE
+ COUNTRY                                            VARCHAR2(25)
+
+SQL> desc match;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ MATCHID                                   NOT NULL VARCHAR2(25)
+ MATCH_DATE                                         DATE
+ MATCH_TIME                                         TIMESTAMP(6)
+ RESULT                                             VARCHAR2(50)
+
+SQL> desc ground;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ GROUNDID                                  NOT NULL VARCHAR2(25)
+ NAME                                               VARCHAR2(50)
+ LOCATION                                           VARCHAR2(50)
+ CAPACITY                                           NUMBER(38)
+
+SQL> select * from Cricketboard;
+
+BOARDID                   NAME
+------------------------- --------------------------------------------------
+ADDRESS                                               CONTACT
+-------------------------------------------------- ----------
+101                       b1
+chennai                                             889081901
+
+102                       b2
+delih
+
+103                       b3
+hyd                                                9954698706
+
+
+SQL> select * from team;
+
+TEAMID                    NAME                      COACH
+------------------------- ------------------------- -------------------------
+CAPTIAN
+--------------------------------------------------
+01                        csk                       stephen fleming
+Dhoni
+
+02                        rcb                       andy flower
+rajat patdiar
+
+03                        mumbai                    jayawarden
+hardik
+
+
+SQL> select * from player;
+
+PLAYERID                  FNAME                     LNAME
+------------------------- ------------------------- -------------------------
+       AGE DATEOFBAR PLAYINGROLE
+---------- --------- --------------------------------------------------
+1001                      MS                        DHONI
+        49 12-AUG-87 BATSMAN
+
+1002                      RAJAT                     PADITAR
+        34 08-SEP-00 BATSMAN
+
+
+SQL> select * from umpire;
+
+UMPIREID                  FNAME                     LNAME
+------------------------- ------------------------- -------------------------
+       AGE DATEOFBIR COUNTRY
+---------- --------- -------------------------
+201                       simon                     kumar
+        54 12-AUG-97 australia
+
+202                       kumar                     ramswami
+        55 12-JUL-65 srilanka
+
+
+SQL> select * from ground;
+
+GROUNDID                  NAME
+------------------------- --------------------------------------------------
+LOCATION                                             CAPACITY
+-------------------------------------------------- ----------
+301                       wankhede
+mumbai                                                  33000
+
+302                       lords
+london                                                 300000
+
+303                       mcg
+melbourne                                            10000000
+
+
+SQL>
